@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Homes | Luxury Real Estate</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display (Headings), Plus Jakarta Sans (UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        primary: '#0B1120', // Rich Dark Blue
+                        secondary: '#1E293B', // Slate 800
+                        accent: '#D4AF37', // Metallic Gold
+                        'accent-light': '#F3E5AB',
+                        surface: '#F8FAFC',
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'glow': '0 0 20px rgba(212, 175, 55, 0.3)',
+                        'card': '0 10px 40px -10px rgba(0,0,0,0.08)'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #F8FAFC;
+        }
+
+        /* Glassmorphism Classes */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .glass-dark {
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Scroll Reveal Animation Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #0B1120 0%, #334155 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .group:hover .img-zoom-container img {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-600 antialiased selection:bg-accent selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 px-6 lg:px-12 top-0">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group z-50">
+                <div class="w-10 h-10 bg-primary text-accent flex items-center justify-center rounded-xl shadow-lg group-hover:rotate-12 transition-transform duration-300">
+                    <i class="fa-solid fa-building text-lg"></i>
+                </div>
+                <span class="text-2xl font-serif font-bold text-primary tracking-tight">Horizon<span class="text-accent">.</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-10 glass px-8 py-3 rounded-full shadow-sm">
+                <a href="#featured" class="text-sm font-semibold text-slate-600 hover:text-accent transition-colors">Properties</a>
+                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-accent transition-colors">Services</a>
+                <a href="#about" class="text-sm font-semibold text-slate-600 hover:text-accent transition-colors">About</a>
+                <a href="#testimonials" class="text-sm font-semibold text-slate-600 hover:text-accent transition-colors">Reviews</a>
+            </div>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden md:inline-flex bg-primary hover:bg-accent text-white px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-glow transform hover:-translate-y-0.5">
+                    Book Consultation
+                </a>
+                <button id="mobile-menu-btn" class="lg:hidden w-12 h-12 flex items-center justify-center rounded-full bg-white/80 backdrop-blur text-primary shadow-md hover:text-accent transition-colors z-50 relative">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay (Fullscreen) -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-primary transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-center items-center space-y-8">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-white/50 hover:text-white text-3xl transition-colors p-4 cursor-pointer">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="#featured" class="mobile-link text-3xl font-serif font-bold text-white hover:text-accent transition-colors">Properties</a>
+        <a href="#services" class="mobile-link text-3xl font-serif font-bold text-white hover:text-accent transition-colors">Services</a>
+        <a href="#about" class="mobile-link text-3xl font-serif font-bold text-white hover:text-accent transition-colors">About Us</a>
+        <a href="#testimonials" class="mobile-link text-3xl font-serif font-bold text-white hover:text-accent transition-colors">Reviews</a>
+        <a href="#contact" class="mt-8 px-8 py-4 border border-accent text-accent rounded-full font-bold hover:bg-accent hover:text-primary transition-all">
+            Contact Agent
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-clip">
+        <!-- Background Image with Parallax Effect -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop" alt="Luxury Home" class="w-full h-full object-cover scale-105 animate-[pulse_10s_ease-in-out_infinite_alternate]">
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/10 to-slate-50"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center pt-32 pb-20">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white/90 text-xs font-bold uppercase tracking-widest mb-8 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                #1 Real Estate Agency
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight mb-8 drop-shadow-lg animate-fade-in-up" style="animation-delay: 0.1s;">
+                Beyond <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-light to-accent italic">Expectations.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-white max-w-2xl mx-auto mb-12 font-medium leading-relaxed drop-shadow-md animate-fade-in-up" style="animation-delay: 0.2s;">
+                Experience the pinnacle of luxury living. We curate exclusive properties that define sophistication and comfort.
+            </p>
+
+            <!-- Modern Floating Search Bar -->
+            <div class="max-w-5xl mx-auto bg-white/95 backdrop-blur-xl p-4 md:p-3 rounded-[1.5rem] md:rounded-[2rem] shadow-2xl animate-fade-in-up transform transition-all hover:scale-[1.01]" style="animation-delay: 0.3s;">
+                <form class="flex flex-col lg:flex-row gap-3">
+                    
+                    <div class="flex-1 relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-accent">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <input type="text" placeholder="City, neighborhood, or address" 
+                            class="w-full pl-12 pr-4 py-4 bg-slate-50 rounded-[1.5rem] border-2 border-transparent focus:border-accent/30 focus:bg-white focus:outline-none transition-all text-slate-800 font-medium placeholder-slate-400">
+                    </div>
+
+                    <div class="w-full lg:w-48 relative">
+                        <select class="w-full h-full px-6 py-4 bg-slate-50 rounded-[1.2rem] md:rounded-[1.5rem] border-2 border-transparent focus:border-accent/30 focus:bg-white focus:outline-none transition-all text-slate-800 font-medium appearance-none cursor-pointer">
+                            <option>Property Type</option>
+                            <option>Villa</option>
+                            <option>Penthouse</option>
+                            <option>Mansion</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-48 relative">
+                        <select class="w-full h-full px-6 py-4 bg-slate-50 rounded-[1.2rem] md:rounded-[1.5rem] border-2 border-transparent focus:border-accent/30 focus:bg-white focus:outline-none transition-all text-slate-800 font-medium appearance-none cursor-pointer">
+                            <option>Price Range</option>
+                            <option>$500k - $1M</option>
+                            <option>$1M - $5M</option>
+                            <option>$5M+</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+
+                    <button type="button" class="bg-primary hover:bg-accent text-white px-10 py-4 rounded-[1.2rem] md:rounded-[1.5rem] font-bold shadow-lg hover:shadow-glow transition-all duration-300 flex items-center justify-center gap-3 whitespace-nowrap">
+                        <span>Search</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <a href="#featured" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 hover:text-accent transition-colors animate-bounce">
+            <span class="text-[10px] uppercase tracking-widest">Explore</span>
+            <i class="fa-solid fa-chevron-down text-sm"></i>
+        </a>
+    </header>
+
+    <!-- Global Stats Section -->
+    <section class="relative z-20 px-6 -mt-12 md:-mt-16">
+        <div class="max-w-5xl mx-auto bg-white rounded-[2.5rem] shadow-card border border-slate-100 p-8 md:p-12 reveal">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:divide-x divide-slate-100">
+                <div class="text-center px-4">
+                    <div class="text-4xl md:text-5xl font-serif font-bold text-primary mb-2">$2.5B+</div>
+                    <div class="text-xs md:text-sm uppercase tracking-[0.2em] text-slate-400 font-bold">Value Sold</div>
+                </div>
+                <div class="text-center px-4">
+                    <div class="text-4xl md:text-5xl font-serif font-bold text-primary mb-2">450+</div>
+                    <div class="text-xs md:text-sm uppercase tracking-[0.2em] text-slate-400 font-bold">Luxury Homes</div>
+                </div>
+                <div class="text-center px-4">
+                    <div class="text-4xl md:text-5xl font-serif font-bold text-primary mb-2">18</div>
+                    <div class="text-xs md:text-sm uppercase tracking-[0.2em] text-slate-400 font-bold">Global Offices</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section id="featured" class="py-24 px-6 bg-white relative overflow-hidden">
+        <!-- Decorative Background Blob -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div class="max-w-xl">
+                    <span class="text-accent font-bold uppercase tracking-widest text-xs mb-2 block">Curated Portfolio</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-primary leading-tight">Exclusive <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-500">Listings</span></h2>
+                </div>
+                <div class="flex gap-4 mt-6 md:mt-0">
+                    <button class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:border-primary hover:text-primary transition-all"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:border-primary hover:text-primary transition-all"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                
+                <!-- Property Card 1 -->
+                <div class="group bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-card hover:shadow-2xl transition-all duration-500 border border-slate-100 reveal">
+                    <div class="relative h-80 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2671&auto=format&fit=crop" class="w-full h-full object-cover" alt="Villa">
+                        <!-- Floating Badges -->
+                        <div class="absolute top-6 left-6 flex flex-col gap-2">
+                            <span class="bg-white/90 backdrop-blur text-primary text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wide shadow-sm">For Sale</span>
+                        </div>
+                        <div class="absolute top-6 right-6">
+                            <button class="w-10 h-10 bg-white/50 backdrop-blur rounded-full flex items-center justify-center text-white hover:bg-accent hover:text-white transition-colors"><i class="fa-solid fa-heart"></i></button>
+                        </div>
+                        <!-- Price Tag -->
+                        <div class="absolute bottom-6 left-6 bg-primary/90 backdrop-blur-md text-white px-5 py-3 rounded-2xl border border-white/10 shadow-lg">
+                            <span class="block text-xs text-accent-light font-medium mb-0.5">Starting at</span>
+                            <span class="text-xl font-serif font-bold">$2,450,000</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-2xl font-serif font-bold text-primary group-hover:text-accent transition-colors">The Modern Beverly</h3>
+                            <div class="flex text-accent text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 mb-6 flex items-center text-sm font-medium">
+                            <i class="fa-solid fa-location-dot text-accent mr-2"></i> Beverly Hills, CA
+                        </p>
+                        
+                        <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">4</span>
+                                <span class="text-xs text-slate-400 uppercase">Beds</span>
+                            </div>
+                            <div class="w-px h-8 bg-slate-100"></div>
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">3</span>
+                                <span class="text-xs text-slate-400 uppercase">Baths</span>
+                            </div>
+                            <div class="w-px h-8 bg-slate-100"></div>
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">3.2k</span>
+                                <span class="text-xs text-slate-400 uppercase">Sqft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="group bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-card hover:shadow-2xl transition-all duration-500 border border-slate-100 reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-80 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover" alt="Villa">
+                        <div class="absolute top-6 left-6 flex flex-col gap-2">
+                            <span class="bg-accent text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wide shadow-sm">Hot Deal</span>
+                        </div>
+                        <div class="absolute top-6 right-6">
+                            <button class="w-10 h-10 bg-white/50 backdrop-blur rounded-full flex items-center justify-center text-white hover:bg-accent hover:text-white transition-colors"><i class="fa-solid fa-heart"></i></button>
+                        </div>
+                        <div class="absolute bottom-6 left-6 bg-primary/90 backdrop-blur-md text-white px-5 py-3 rounded-2xl border border-white/10 shadow-lg">
+                            <span class="block text-xs text-accent-light font-medium mb-0.5">Starting at</span>
+                            <span class="text-xl font-serif font-bold">$1,850,000</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-2xl font-serif font-bold text-primary group-hover:text-accent transition-colors">Palm Springs Retreat</h3>
+                            <div class="flex text-accent text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 mb-6 flex items-center text-sm font-medium">
+                            <i class="fa-solid fa-location-dot text-accent mr-2"></i> Palm Springs, CA
+                        </p>
+                        
+                        <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">5</span>
+                                <span class="text-xs text-slate-400 uppercase">Beds</span>
+                            </div>
+                            <div class="w-px h-8 bg-slate-100"></div>
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">4</span>
+                                <span class="text-xs text-slate-400 uppercase">Baths</span>
+                            </div>
+                            <div class="w-px h-8 bg-slate-100"></div>
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">4.1k</span>
+                                <span class="text-xs text-slate-400 uppercase">Sqft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="group bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-card hover:shadow-2xl transition-all duration-500 border border-slate-100 reveal" style="transition-delay: 200ms;">
+                    <div class="relative h-80 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop" class="w-full h-full object-cover" alt="Villa">
+                        <div class="absolute top-6 left-6 flex flex-col gap-2">
+                            <span class="bg-white/90 backdrop-blur text-primary text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wide shadow-sm">New Build</span>
+                        </div>
+                        <div class="absolute top-6 right-6">
+                            <button class="w-10 h-10 bg-white/50 backdrop-blur rounded-full flex items-center justify-center text-white hover:bg-accent hover:text-white transition-colors"><i class="fa-solid fa-heart"></i></button>
+                        </div>
+                        <div class="absolute bottom-6 left-6 bg-primary/90 backdrop-blur-md text-white px-5 py-3 rounded-2xl border border-white/10 shadow-lg">
+                            <span class="block text-xs text-accent-light font-medium mb-0.5">Starting at</span>
+                            <span class="text-xl font-serif font-bold">$3,200,000</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-2xl font-serif font-bold text-primary group-hover:text-accent transition-colors">Coastal Glass House</h3>
+                            <div class="flex text-accent text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 mb-6 flex items-center text-sm font-medium">
+                            <i class="fa-solid fa-location-dot text-accent mr-2"></i> Malibu, CA
+                        </p>
+                        
+                        <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">3</span>
+                                <span class="text-xs text-slate-400 uppercase">Beds</span>
+                            </div>
+                            <div class="w-px h-8 bg-slate-100"></div>
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">3</span>
+                                <span class="text-xs text-slate-400 uppercase">Baths</span>
+                            </div>
+                            <div class="w-px h-8 bg-slate-100"></div>
+                            <div class="text-center">
+                                <span class="block text-slate-800 font-bold text-lg">2.8k</span>
+                                <span class="text-xs text-slate-400 uppercase">Sqft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center reveal">
+                <a href="#" class="inline-flex items-center gap-2 text-primary font-bold border-b-2 border-accent pb-1 hover:text-accent transition-colors">
+                    View All Properties <i class="fa-solid fa-arrow-right-long"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Why Us -->
+    <section id="services" class="py-24 bg-surface relative overflow-x-hidden">
+        <!-- Background Decoration -->
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-slate-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="text-accent font-bold uppercase tracking-widest text-xs mb-2 block">Our Services</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-primary leading-tight mb-6">We Handle Everything So You Can Relax</h2>
+                    <p class="text-slate-500 text-lg leading-relaxed mb-8">
+                        Navigating the luxury real estate market requires expertise, discretion, and a deep network. At Horizon, we provide a white-glove service tailored to your unique lifestyle.
+                    </p>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-accent text-xl flex-shrink-0">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-1">Verified Properties</h4>
+                                <p class="text-sm text-slate-500">Every listing undergoes a rigorous 50-point inspection for quality assurance.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-accent text-xl flex-shrink-0">
+                                <i class="fa-solid fa-scale-balanced"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-1">Legal & Financial</h4>
+                                <p class="text-sm text-slate-500">Our in-house experts handle complex negotiations, contracts, and compliance.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-accent text-xl flex-shrink-0">
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-1">Property Management</h4>
+                                <p class="text-sm text-slate-500">Maintenance, tenant screening, and rental services for your investment portfolio.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="relative reveal">
+                    <div class="relative rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2673&auto=format&fit=crop" class="w-full object-cover" alt="Interior">
+                        <!-- Floating Card -->
+                        <div class="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/50 animate-float">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-accent text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
+                                    98%
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-500 font-medium uppercase tracking-wide">Client Satisfaction</p>
+                                    <p class="text-primary font-bold text-lg">Based on 1,200+ Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative border -->
+                    <div class="absolute -inset-4 border-2 border-accent/20 rounded-[1.8rem] md:rounded-[2.5rem] -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Breaker / CTA -->
+    <section class="py-32 bg-primary relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover mix-blend-overlay" alt="Background">
+        </div>
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/70"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-white mb-8 max-w-4xl mx-auto">Find a home <br class="hidden sm:block"> that fits your <span class="text-accent italic">dreams.</span></h2>
+            <div class="flex flex-col sm:flex-row justify-center gap-6 mt-10">
+                <a href="#contact" class="bg-accent hover:bg-white hover:text-primary text-white px-10 py-4 rounded-full font-bold text-lg shadow-glow transition-all duration-300 transform hover:-translate-y-1">
+                    Schedule a Viewing
+                </a>
+                <a href="#featured" class="bg-transparent border border-white/30 text-white hover:bg-white/10 px-10 py-4 rounded-full font-bold text-lg transition-all duration-300">
+                    Browse Listings
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <span class="text-accent font-bold uppercase tracking-widest text-xs mb-2 block">Testimonials</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-primary">Client Stories</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-surface p-10 rounded-3xl relative reveal group hover:bg-primary transition-colors duration-500">
+                    <i class="fa-solid fa-quote-right text-4xl text-slate-200 group-hover:text-white/20 absolute top-8 right-8 transition-colors"></i>
+                    <div class="flex text-accent mb-6 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 group-hover:text-slate-300 text-lg font-serif italic mb-8 leading-relaxed transition-colors">
+                        "Horizon Homes didn't just find us a house; they found us a sanctuary. The attention to detail was impeccable."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md" alt="User">
+                        <div>
+                            <h4 class="font-bold text-primary group-hover:text-white transition-colors">Marcus Chen</h4>
+                            <p class="text-xs text-slate-400 uppercase tracking-wider group-hover:text-slate-400">Homeowner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-surface p-10 rounded-3xl relative reveal group hover:bg-primary transition-colors duration-500" style="transition-delay: 100ms;">
+                    <i class="fa-solid fa-quote-right text-4xl text-slate-200 group-hover:text-white/20 absolute top-8 right-8 transition-colors"></i>
+                    <div class="flex text-accent mb-6 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 group-hover:text-slate-300 text-lg font-serif italic mb-8 leading-relaxed transition-colors">
+                        "Professional, courteous, and incredibly knowledgeable. We sold our home in 2 weeks above asking price."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md" alt="User">
+                        <div>
+                            <h4 class="font-bold text-primary group-hover:text-white transition-colors">Sarah Jenkins</h4>
+                            <p class="text-xs text-slate-400 uppercase tracking-wider group-hover:text-slate-400">Investor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-surface p-10 rounded-3xl relative reveal group hover:bg-primary transition-colors duration-500 hidden lg:block" style="transition-delay: 200ms;">
+                    <i class="fa-solid fa-quote-right text-4xl text-slate-200 group-hover:text-white/20 absolute top-8 right-8 transition-colors"></i>
+                    <div class="flex text-accent mb-6 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 group-hover:text-slate-300 text-lg font-serif italic mb-8 leading-relaxed transition-colors">
+                        "The best real estate experience I've ever had. Their negotiation skills are top-tier."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md" alt="User">
+                        <div>
+                            <h4 class="font-bold text-primary group-hover:text-white transition-colors">David Ross</h4>
+                            <p class="text-xs text-slate-400 uppercase tracking-wider group-hover:text-slate-400">Architect</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-24 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
+                <!-- Brand -->
+                <div class="space-y-6">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-800 text-accent flex items-center justify-center rounded-xl">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <span class="text-2xl font-serif font-bold">Horizon<span class="text-accent">.</span></span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Redefining luxury living with exceptional properties and unparalleled service across the globe.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-accent hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-accent hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-accent hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Company</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-accent transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Support</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-accent transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Help Center</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Stay Updated</h4>
+                    <p class="text-sm text-slate-400 mb-6">Subscribe for exclusive market insights and new listings.</p>
+                    <form onsubmit="event.preventDefault();" class="flex flex-col gap-3">
+                        <input type="email" placeholder="Enter your email" class="bg-slate-800/50 border border-slate-700 text-white px-5 py-3 rounded-xl focus:outline-none focus:border-accent text-sm transition-colors">
+                        <button class="bg-accent hover:bg-white hover:text-primary text-white font-bold py-3 rounded-xl transition-all duration-300 shadow-lg">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+                <p>&copy; 2024 Horizon Homes. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // --- Mobile Menu Logic (Full Screen Overlay) ---
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = 'auto';
+        }
+
+        mobileBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+        
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass', 'shadow-sm', 'py-3');
+                navbar.classList.remove('py-6');
+            } else {
+                navbar.classList.remove('glass', 'shadow-sm', 'py-3');
+                navbar.classList.add('py-6');
+            }
+        });
+
+        // --- Scroll Reveal Animation with Stagger ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            var windowHeight = window.innerHeight;
+            var elementVisible = 100; // Trigger point
+
+            reveals.forEach((reveal, index) => {
+                var elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    // Add a slight delay based on index for staggered effect if multiple are in view
+                    setTimeout(() => {
+                        reveal.classList.add("active");
+                    }, index * 50); 
+                }
+            });
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+
+        // --- Smooth Scroll for Anchors ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
